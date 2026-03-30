@@ -14,3 +14,8 @@ Route::get('/login', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+// ini route landing
+Route::get('/landing', function () {
+    return view('landing');
+});
