@@ -1,35 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CipherController;
+use App\Http\Controllers\AuthController;
 
-//ini route milik caesar cipher
-Route::get('/', [CipherController::class, 'index']);
-Route::post('/process', [CipherController::class, 'process']);
-
-// --- Route Auth ---
-
-// 1. Menampilkan halaman login
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-// 2. Proses Authentication (Arahkan ke Method di Controller)
+// Halaman Login
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
-
-// 3. Halaman Dashboard (Terproteksi)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard'); // Tambahkan name 'dashboard' di sini
-
-// 4. Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Proteksi Dashboard Tanpa Embel-embel Auth Laravel
+Route::get('/dashboard', function () {
+    if (!session()->has('is_logged_in')) {
+        return redirect('/login');
+    }
+    return view('dashboard');
+})->name('dashboard');
 
-// --- Route Lainnya ---
-Route::get('/', [CipherController::class, 'index']);
-Route::post('/process', [CipherController::class, 'process']);
-
-Route::get('/landing', function () {
-    return view('landing');
-})->name('landing');
+// Route Cipher Anda
+Route::get('/', [\App\Http\Controllers\CipherController::class, 'index']);
+Route::post('/process', [\App\Http\Controllers\CipherController::class, 'process']);

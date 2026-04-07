@@ -44,7 +44,12 @@
 <nav class="navbar navbar-dark bg-danger shadow">
   <div class="container">
     <span class="navbar-brand fw-bold">PPM SYAFI'UR ROHMAN</span>
-    <button class="btn btn-light btn-sm" onclick="logout()">Logout</button>
+    
+    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+      @csrf
+      <button type="submit" class="btn btn-light btn-sm">Logout</button>
+  </form>
+
   </div>
 </nav>
 
@@ -89,12 +94,6 @@
 <footer class="bg-danger text-white text-center py-3">
   © 2026 PPM SYAFI'UR ROHMAN
 </footer>
-
-<script>
-function logout(){
-  window.location.href = "login";
-}
-</script>
 
 </body>
 </html>
