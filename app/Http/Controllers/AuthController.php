@@ -8,22 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
-    {
-        if (session()->has('is_logged_in')) {
-            return redirect('/login');
-        }
-        return view('login');
-    }
-
     public function authenticate(Request $request)
     {
-        // if ($request->username === 'tiara' && $request->password === '123') {
-        //     session(['is_logged_in' => true, 'user' => 'tiara']);
-        //     return redirect('/dashboard');
-        // }
-        // return back()->withErrors(['loginError' => 'Salah!']);
-
         $kredensial = $request->validate([
             'email' => ['required'],
             'password' => ['required'],
@@ -32,15 +18,17 @@ class AuthController extends Controller
         if (Auth::attempt($kredensial)) {
             $request->session()->regenerate();
 
-            return redirect('/dashboard');
+            return redirect('/dashboard'); // hanya redirect
         }
 
         return back()->withErrors(['message' => 'Invalid credentials']);
     }
 
-    public function logout()
+    public function showLoginForm()
     {
-        session()->forget(['is_logged_in', 'user']);
-        return redirect('/login');
+        if (session()->has('is_logged_in')) {
+            return redirect('/login');
+        }
+        return view('login');
     }
 }
