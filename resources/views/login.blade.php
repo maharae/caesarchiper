@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Login - PPM SYAFI'UR ROHMAN</title>
@@ -7,42 +8,60 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(rgba(220,53,69,0.7), rgba(0,0,0,0.7)), url('img/bg.jpg') center/cover no-repeat;
-            height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0;
+            background: linear-gradient(rgba(220, 53, 69, 0.7), rgba(0, 0, 0, 0.7)), url('img/bg.jpg') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
         }
-        .login-card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 100%; max-width: 400px; }
-        .title { color: #dc3545; }
+
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .title {
+            color: #dc3545;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="login-card">
-    <h3 class="text-center title fw-bold mb-4">LOGIN</h3>
+    <div class="login-card">
+        <h3 class="text-center title fw-bold mb-4">LOGIN</h3>
 
-    <form action="{{ route('login.post') }}" method="POST">
-        @csrf 
-        <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" value="{{ old('username') }}" required autofocus>
-        </div>
+        <form action="{{ route('login.post') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" value="{{ old('email') }}" required
+                    autofocus>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
 
-        <div class="mb-3 form-check">
-            <input type="checkbox" name="remember" class="form-check-input" id="remember">
-            <label class="form-check-label" for="remember">Ingat saya</label>
-        </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" name="remember" class="form-check-input" id="remember">
+                <label class="form-check-label" for="remember">Ingat saya</label>
+            </div>
 
-        @if($errors->has('loginError'))
-            <div class="alert alert-danger py-2">{{ $errors->first('loginError') }}</div>
-        @endif
+            @if ($errors->has('loginError'))
+                <div class="alert alert-danger py-2">{{ $errors->first('loginError') }}</div>
+            @endif
 
-        <button type="submit" class="btn btn-danger w-100 shadow-sm" style="border-radius: 25px;">Login</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-danger w-100 shadow-sm" style="border-radius: 25px;">Login</button>
+        </form>
+    </div>
 
 </body>
+
 </html>

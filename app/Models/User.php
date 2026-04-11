@@ -7,11 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     // Menonaktifkan koneksi database agar tidak error SQLSTATE
-    protected $table = null;
-    public $timestamps = false;
+    protected $table = 'pengguna';
+    public $timestamps = true;
 
     protected $fillable = [
-        'username',
+        'email',
         'password',
     ];
 
@@ -21,11 +21,11 @@ class User extends Authenticatable
      */
     public function getAuthIdentifierName()
     {
-        return 'username';
+        return 'email';
     }
 
     public function getAuthIdentifier()
     {
-        return $this->username;
+        return $this->email;
     }
 }
