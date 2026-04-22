@@ -5,8 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CRUDController;
+use App\Http\Controllers\BukuController;
 
-
+// Route::prefix('auth')->group (function(){}
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -23,6 +24,8 @@ Route::delete('/crud/{id}', [CRUDController::class, 'destroy'])->name('crud.dest
 // Route Cipher Anda
 Route::get('/', [\App\Http\Controllers\CipherController::class, 'index']);
 Route::post('/process', [\App\Http\Controllers\CipherController::class, 'process']);
+
+Route::get('/buku', [BukuController::class, 'index']);
 
 // // Proteksi Dashboard
 // Route::get('/dashboard', function () {
